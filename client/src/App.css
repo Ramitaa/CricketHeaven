@@ -1,0 +1,60 @@
+body, html {
+    background-image: url("../src/components/cricket_heaven_bg.png");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.fade-exit {
+    opacity: 1;
+    background-color: rgba(255, 0, 0);
+}
+
+.fade-exit-active {
+    opacity: 0.01;
+    transition: opacity 1000ms ease-in;
+    background-color: rgba(255, 0, 0);
+}
+
+.login, .register, .page_not_found {
+    background: url("../src/components/cricket_heaven_login.png");
+    background-repeat: no-repeat;
+    min-height: 100%;
+    min-width: 100%;
+    background-size: cover;
+    position: fixed;
+    display: flex;
+    align-items: center !important;
+    justify-content: center;
+    flex-shrink: 1 0 auto;
+}
+
+.mb-5, .my-5 {
+    margin-bottom: 0rem!important;
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem !important; 
+}
+
+.btn-grad {
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-position: right center; /* change the direction of the change here */
+}
+  
+.btn-grad {
+    background-image: linear-gradient(to right, #50e688 0%, #68ccfc 51%, #50e688 100%);
+}
