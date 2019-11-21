@@ -8,7 +8,9 @@ import {
   NavItem,
   NavLink,
   Container,
-  UncontrolledTooltip
+  UncontrolledPopover, 
+  PopoverHeader, 
+  PopoverBody
 } from 'reactstrap';
 import Logout from '../components/Logout';
 import { connect } from 'react-redux';
@@ -29,16 +31,36 @@ class AppNavBar extends Component {
 
         const { isAuthenticated, user } = this.props.auth;
 
+        const max_style = {
+            padding: '20px 10px 20px 10px'
+        }
+
+        const vadivelu_style = {
+            marginTop: '20px',
+            textAlign: 'right'
+        }
+
+        const ar_style = {
+            cursor: 'pointer'
+        }
+
         const authLinks = (
             <Fragment>
-                <NavItem id="UncontrolledTooltipExample">
-                    <span className="navbar-text mr-3">
+                <NavItem id="PopoverLegacy">
+                    <span className="navbar-text mr-3" style={ar_style}>
                         <strong>{ user ? `Welcome ${user.name}!` : '' }</strong>
                     </span>
-                    <UncontrolledTooltip placement="bottom" target="UncontrolledTooltipExample">
+                    <UncontrolledPopover trigger="legacy" placement="bottom" target="PopoverLegacy">
+                    <PopoverHeader>Account Details</PopoverHeader>
+                    <PopoverBody style={max_style}>
+                        { user ? `User ID: ${user._id}` : '' } <br />
                         { user ? `Name: ${user.name}` : '' } <br />
                         { user ? `Email: ${user.email}` : '' }
-                    </UncontrolledTooltip>
+                        <div style={vadivelu_style}>
+                        <a  className="btn btn-grad" href={`/updatePassword`}>Update Details</a>
+                        </div>
+                    </PopoverBody>
+                </UncontrolledPopover>
                 </NavItem>
                 <NavItem>
                     <NavLink href="/searchHistory">History</NavLink>

@@ -123,4 +123,46 @@ router.get('/getUserToken', auth, (req, res) => {
     .then(user => res.json(user));
 })
 
+
+// @route POST api/users/updatePassword
+// @desc  Update password in mongodb
+// @access PRIVATE
+router.put('/updatePassword', (req, res) =>{
+    
+    const { id, name, email, password } = req.body;
+
+    if (!id){
+        return res.status(400).json({msg: 'ID is required!'}); }
+
+    if (!name || !email || !password){
+        return res.status(400).json({msg: 'All fields are required!'}); }
+    
+    var updatedUser = {
+        name: name, 
+        email: email, 
+        password: password
+    }
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+            if (err) throw err;
+            console.log("Updating password 1:" + hash);
+            updatedUser.password = hash;
+            console.log("Updating password 2:" + updatedUser.password);
+
+            User.findByIdAndUpdate(id, updatedUser, { new: true}, function(err, user) {
+                res.json({
+                    user :{
+                        id: user.id,
+                        name: user.name,
+                        email: user.email
+                    },
+                    success: true
+                });
+            });
+        })
+    });      
+    
+});
+
 module.exports = router;

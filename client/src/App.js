@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import SearchHistory from './components/SearchHistory';
 import PageNotFound from './components/PageNotFound';
+import UpdatePassword from './components/UpdatePassword';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
@@ -35,6 +36,7 @@ class App extends Component {
           <Route exact path="/searchPlayer/:name" component = { SearchPlayer } />
           <Route exact path="/viewPlayer/:id" component = { ViewPlayer } />
           <Route exact path="/searchHistory/" component = { SearchHistory } />
+          <Route exact path="/updatePassword/" component = { UpdatePassword } />
           <Route component = { PageNotFound } />
           </Switch>
         </div>

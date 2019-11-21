@@ -10,7 +10,10 @@ import {
     LOGIN_FAIL,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    LOGOUT_SUCCESS
+    LOGOUT_SUCCESS,
+    UPDATE_PASSWORD_LOADING,
+    UPDATE_PASSWORD_SUCCESS,
+    UPDATE_PASSWORD_FAIL
 } from './types';
 
 // Check authorization and load user
@@ -64,6 +67,40 @@ export const registerActions = ({ name, email, password }) => dispatch => {
             type: REGISTER_FAIL
         });
     });
+};
+
+// Update password
+export const updatePasswordActions = ({ id, name, email, password }) => dispatch => {
+
+    // Headers
+    const config = {
+        headers:{
+            'Content-type': 'application/json'
+        }
+    }
+
+    const body = JSON.stringify({ id, name, email, password });
+    dispatch(setUpdatePasswordLoading());
+    axios.put('/api/users/updatePassword', body, config)
+    .then(res => {
+        dispatch(clearErrors());
+        dispatch({
+            type: UPDATE_PASSWORD_SUCCESS,
+            payload: res.data
+        });
+    })
+    .catch(err => {
+        dispatch( returnErrors(err.response.data, err.response.status, 'UPDATE_PASSWORD_FAIL'));
+        dispatch({
+            type: UPDATE_PASSWORD_FAIL
+        });
+    });
+};
+
+export const setUpdatePasswordLoading = () => {
+    return {
+        type: UPDATE_PASSWORD_LOADING
+    };
 };
 
 // Login user

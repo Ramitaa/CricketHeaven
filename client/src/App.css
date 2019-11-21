@@ -30,6 +30,13 @@ body, html {
     flex-shrink: 1 0 auto;
 }
 
+.updatePassword {
+    display: flex;
+    align-items: center !important;
+    justify-content: center;
+    flex-shrink: 1 0 auto;
+}
+
 .mb-5, .my-5 {
     margin-bottom: 0rem!important;
 }
